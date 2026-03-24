@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Titanic Survival Predictor</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Titanic Survival Predictor</h2>
+
+      <form action="/predict" method="post">
+        <label for="Pclass">Passenger Class (1-3)</label>
+        <input
+          type="number"
+          name="Pclass"
+          min="1"
+          max="3"
+          placeholder="1-3"
+          required
+        />
+        <br /><br />
+
+        <label for="Sex">Gender</label>
+        <select name="Sex" id="Sex" required>
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <br /><br />
+
+        <label for="Age">Age</label>
+        <input
+          type="number"
+          name="Age"
+          min="0"
+          max="100"
+          placeholder="0-100"
+          required
+        />
+        <br /><br />
+
+        <label for="SibSp">Spouse/Siblings</label>
+        <input
+          type="number"
+          name="SibSp"
+          min="0"
+          max="8"
+          placeholder="0-8"
+          required
+        />
+        <br /><br />
+
+        <label for="Parch">Parents/Children</label>
+        <input
+          type="number"
+          name="Parch"
+          min="0"
+          max="6"
+          placeholder="0-6"
+          required
+        />
+        <br /><br />
+
+        <label for="Fare">Fare</label>
+        <input
+          type="number"
+          name="Fare"
+          min="0"
+          step="0.01"
+          placeholder="0.00"
+          required
+        />
+        <br /><br />
+
+        <label for="Embarked">Boarding Port</label>
+        <select name="Embarked" required>
+          <option value="">Select Port</option>
+          <option value="S">Southampton</option>
+          <option value="C">Cherbourg</option>
+          <option value="Q">Queenstown</option></select
+        ><br /><br />
+
+        <button type="submit">Predict Survival</button>
+      </form>
+
+      {% if result %}
+      <div class="result {{ 'survive' if result=='Survived' else 'dead' }}">
+        <h3>{{ result }}</h3>
+        <p>Survival probability: {{ probability }}%</p>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
